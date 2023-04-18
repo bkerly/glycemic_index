@@ -22,7 +22,7 @@ clean_data <- raw_data %>%
   mutate(Food = fct_reorder(Food,-Glycemic_index)) %>%
   mutate(`Ice cream` = (Food == "Ice cream"))
 
-ggplot(clean_data, 
+g <- ggplot(clean_data, 
        aes(x=Food,y=Glycemic_index,fill = Category,color = `Ice cream`))+
   geom_bar(stat="identity")+
   geom_errorbar(aes(ymin = Glycemic_index_low,
@@ -34,4 +34,10 @@ ggplot(clean_data,
   theme(legend.title = element_blank(),
         legend.position = c(0.87, 0.85))+
   ylab("Glycemic Index")
+
+  ggsave(g,
+         filename = "Glycemic Index Graph.png",
+          width = 6,
+         height = 8,
+         units = "in")
 
